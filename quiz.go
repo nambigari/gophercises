@@ -55,13 +55,7 @@ func Score(quiz []QA) (int, int) {
 	return NumberOfQuestions, CorrectAnswers
 }
 
-func main() {
-	argsWithProg := os.Args
-	pathToProblems := "problems.csv"
-	if len(argsWithProg) > 1 {
-		pathToProblems = argsWithProg[1]
-	}
-	quiz := ReadFile(pathToProblems)
+func TakeQuiz(quiz []QA) {
 	for idx, qa := range quiz {
 		fmt.Println(qa.number1, " + ", qa.number2, " ?")
 		var foo int
@@ -69,6 +63,16 @@ func main() {
 		fmt.Println("Input read is :", foo)
 		quiz[idx].answerByUser = foo
 	}
+}
+
+func main() {
+	argsWithProg := os.Args
+	pathToProblems := "problems.csv"
+	if len(argsWithProg) > 1 {
+		pathToProblems = argsWithProg[1]
+	}
+	quiz := ReadFile(pathToProblems)
+	TakeQuiz(quiz)
 	NumberOfQuestions, CorrectAnswers := Score(quiz)
 	fmt.Println("Number of questions : ", NumberOfQuestions)
 	fmt.Println("Correct ansers : ", CorrectAnswers)
